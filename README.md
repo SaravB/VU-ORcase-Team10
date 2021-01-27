@@ -16,8 +16,9 @@ Files:
     - **Results_PostOpt_Feasibility.csv**       csv for our analysis of feasibility before and after postopt
     - **Results_PostOpt_BestAlgo_Averages.csv** csv for our analysis of postopt on the best algorithms per instance (averages of 15 runs with different seeds)
     - **Results_PostOpt_BestAlgo.csv**          csv for our analysis of ranking results
+  - **Solutions**                           folder in which solution files are written when getSolutionForInstance from Main.py is used
   - **VerologCode**                         folder containing the code as used from verolog
-  - **Main.py**                             run this to get all results as used in the report
+  - **Main.py**                             run this to get all results as used in the report. Also contains method getSolutionForInstance, with which you can run a specific algorithm with a specific number of postopt iterations
   - **CreateSchedule.py**                   methods to make the schedule with different algorithms
   - **CreateRoutes.py**                     methods to make the routing based on the predetermines schedule with different algorithms
   - **CreateSolution.py**                   methods to make and validate the solutions (partly copied from Verolog code)
