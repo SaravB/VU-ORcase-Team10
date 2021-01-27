@@ -1,5 +1,6 @@
 # VU-ORcase-Team10
 VeRoLog 2017
+Sara van Bezooijen, Kim van den Houten, Finnbar van Lennep
 
 In this repository we will present our code and results to an optimisation problem, namely the VeRoLog Solver Challenge2016-2017.The challenge is a simplification of a real-life problem encountered by a cattle improvement company. We assume the reader is already acquainted with the challenge, rather than reiterating the full problem description we refer to.
 The main objective is to minimise the cost while serving all requests. There are four different types of costs, namely: costs per distance traveled, costs for using a vehicle for a day, costs for using a vehicle at all and costs for each tool type. The complexity of the problem lies in finding an algorithm that is able to minimise the cost for a variety of problem instances, where each problem instance emphasises a different type of cost.  
