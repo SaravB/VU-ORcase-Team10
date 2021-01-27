@@ -18,12 +18,12 @@ def main():
     instanceNames = ['r100d5', 'r100d10', 'r500d15', 'r1000d25', 'r1000d30']
     costTypes = list(range(1, 6))
 
-    results_df = pd.DataFrame(data = None, index=pd.MultiIndex.from_product([instanceNames, costTypes]), columns=[0] + iterationCounts)
+    results_df = pd.DataFrame(data = 0.0, index=pd.MultiIndex.from_product([instanceNames, costTypes]), columns=[0] + iterationCounts)
 
     # run the whole thing 15 times and take averages
     for i in range(15):
         seed = (i+1)*base_seed
-        
+
         for fn, ct in itertools.product(*[instanceNames, costTypes]):
             instanceFileName = "VeRoLog_" + fn + "_" + str(ct)
 
