@@ -12,7 +12,7 @@ Files:
 - **Report.pdf**                        results of our research and calculations
 - **Code**                              folder containing all code
   - **Instances**                           folder containing text files for all instances used
-  - **Results**                             csv files as produced by our code and used in the report
+  - **Results**                             folder containing csv files as produced by our code and used in the report
     - **Results_noOpt.csv**                     csv for our analysis before postopt is used
     - **Results_PostOpt_Feasibility.csv**       csv for our analysis of feasibility before and after postopt
     - **Results_PostOpt_BestAlgo_Averages.csv** csv for our analysis of postopt on the best algorithms per instance (averages of 15 runs with different seeds)
