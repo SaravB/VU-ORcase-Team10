@@ -55,6 +55,9 @@ def main():
                     feasibleSchedule = False
                     break
 
+            if not feasibleSchedule:
+                continue
+
             # Create routes
             routes = None
             if rt == 'r1':
@@ -86,7 +89,7 @@ def main():
                     results_df.loc[fn, ct][st, rt, 'c'] = solution.Cost
                     break
 
-            results_df.to_csv(resultsFolder + "Results_PostOpt_Feasibility.csv")
+        results_df.to_csv(resultsFolder + "Results_PostOpt_Feasibility.csv")
 
 
 if __name__ == '__main__':
