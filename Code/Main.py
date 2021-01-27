@@ -6,6 +6,7 @@ import Analysis_PostOpt
 import CreateSchedule as CS
 import CreateRoutes as CR
 import PostOptimization as PO
+import CreateSolution as CSO
 from VerologCode.InstanceCVRPTWUI import InstanceCVRPTWUI
 from VerologCode.SolutionCVRPTWUI import SolutionCVRPTWUI
 
@@ -48,16 +49,17 @@ def getSolutionForInstance(instanceName, scheduleType, routingType, postoptItera
     elif routingType == 'r4':
         routes = CR.make_day_routes(instance, schedule, df, CR.cheapest_fit)
 
-    solution = CS.Solution(routes)
+    solution = CSO.Solution(routes)
     solution.calc_solution(instance)
     solution.calc_cost(instance)
 
     if postoptIterations > 0:
         solution, _, _ = PO.post_optimization(solution=solution, iterations=postoptIterations, instance=instance, seed=seed)
 
-    resultsFolder = "Results/"
-    solution.write_solution(resultsFolder + "Solution_" + instanceName + ".txt", instance, solution)
-    checkCalculations = SolutionCVRPTWUI(resultsFolder + "Solution_" + instanceName + ".txt", instance, continueOnErr=True)
+    solutionsFolder = "Solutions/"
+    solutionFileName = "Solution_" + instanceName + "_" + scheduleType + routingType + "po" + str(postoptIterations)
+    solution.write_solution(solutionsFolder + solutionFileName + ".txt", instance, solution)
+    checkCalculations = SolutionCVRPTWUI(solutionsFolder + solutionFileName + ".txt", instance, continueOnErr=True)
 
     # solution contains costs as calculated by our code
     # checkCalculations contains the costs and error report as calculated by the Solution validator script from https://verolog2017.ortec.com/downloads

@@ -1,18 +1,4 @@
 
-Code/.idea/inspectionProfiles/profiles_settings.xml
-Code/.idea/misc.xml
-Code/.idea/modules.xml
-Code/.idea/workspace.xml
-Code/__pycache__/Analysis_noOpt.cpython-38.pyc
-Code/__pycache__/Analysis_PostOpt.cpython-38.pyc
-Code/__pycache__/CreateRoutes.cpython-38.pyc
-Code/__pycache__/CreateSchedule.cpython-38.pyc
-Code/__pycache__/CreateSolution.cpython-38.pyc
-Code/__pycache__/GetResults_noOpt.cpython-38.pyc
-Code/__pycache__/GetResults_PostOpt_BestAlgo.cpython-38.pyc
-Code/__pycache__/GetResults_PostOpt_Feasibility.cpython-38.pyc
-Code/__pycache__/Main.cpython-38.pyc
-Code/__pycache__/PostOptimization.cpython-38.pyc
-Code/VerologCode/__pycache__/baseCVRPTWUI.cpython-38.pyc
-Code/VerologCode/__pycache__/InstanceCVRPTWUI.cpython-38.pyc
-Code/.idea/Code.iml
+*.pyc
+*.xml
+*.iml
