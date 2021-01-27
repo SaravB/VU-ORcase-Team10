@@ -11,7 +11,7 @@ def main():
     instanceFolder = "Instances/"
     resultsFolder = "Results/"
 
-    seed = 100
+    base_seed = 100
 
     iterationCounts = list(range(10, 160, 10))
 
@@ -22,6 +22,8 @@ def main():
 
     # run the whole thing 15 times and take averages
     for i in range(15):
+        seed = (i+1)*base_seed
+        
         for fn, ct in itertools.product(*[instanceNames, costTypes]):
             instanceFileName = "VeRoLog_" + fn + "_" + str(ct)
 
@@ -56,6 +58,7 @@ def main():
         if i == 0:
             results_df.to_csv(resultsFolder + "Results_PostOpt_BestAlgo.csv")
         else:
+            print(i)
             results_df.to_csv(resultsFolder + "Results_PostOpt_BestAlgo_Averages.csv")
 
 
