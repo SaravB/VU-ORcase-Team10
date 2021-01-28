@@ -14,20 +14,19 @@ def main():
     data = pd.read_csv("Results/results_noOpt.csv", header=[0, 1,2], index_col=[0,1])
     new_data = data
 
-    for st, rt in itertools.product(*[scheduleTypes,routingTypes]):
-        new_data.loc[data[st, rt, 'f'] == 0, (st, rt,['tu', 'vd', 'mnv', 'd', 'c'])] = None
+    for st, rt in itertools.product(*[scheduleTypes, routingTypes]):
+        new_data.loc[data[st, rt, 'f'] == 0, (st, rt, ['tu', 'vd', 'mnv', 'd', 'c'])] = None
 
     def calc_ranking(new_data, letter, dictionary=False):
         best = []
         algs = []
 
         for i in costTypes:
-            counts = np.zeros(5)
             for filename in instanceNames:
-                costs = new_data.loc[filename, i][:,:, letter].dropna()
+                costs = new_data.loc[filename, i][:, :, letter].dropna()
                 temp = costs.sort_values(ascending=True).head(3)
-                algs += [st+rt for st, rt in temp.axes[0]]
-                best.append([filename, i] +[st+rt for st, rt in temp.axes[0]])
+                algs += [st + rt for st, rt in temp.axes[0]]
+                best.append([filename, i] + [st + rt for st, rt in temp.axes[0]])
 
         algs = sorted(set(algs))
 
@@ -35,11 +34,11 @@ def main():
         for alg in algs:
             counts = np.zeros(5)
             for info in best:
-                if len(info) >=3 and info[2] == alg:
-                    counts[info[1]-1] += 3
-                if len(info) >=4 and info[3] == alg:
+                if len(info) >= 3 and info[2] == alg:
+                    counts[info[1] - 1] += 3
+                if len(info) >= 4 and info[3] == alg:
                     counts[info[1] - 1] += 2
-                if len(info) >=5 and info[4] == alg:
+                if len(info) >= 5 and info[4] == alg:
                     counts[info[1] - 1] += 1
             best_dict[alg] = counts
 
@@ -53,7 +52,7 @@ def main():
 
     keys = best_dict.keys()
     specs = ['tu', 'vd', 'mnv', 'd']
-    df_algs = new_data['s1', 'r1', 'c'] # just a none column so we start with the right indices
+    df_algs = new_data['s1', 'r1', 'c']  # just a none column so we start with the right indices
     for key in keys:
         for spec in specs:
             df_algs = pd.concat([df_algs, new_data[key[:2], key[2:], spec]], axis=1)
@@ -63,15 +62,29 @@ def main():
     mnv = calc_ranking(df_algs, 'mnv')
     vd = calc_ranking(df_algs, 'vd')
 
-    df = pd.concat([tu, vd, mnv, d, c], axis =1)
-    df.columns = ['tool use', 'vehicle days', 'max number of vehicles', 'distance', 'cost']   # let op 'c'
+    df = pd.concat([tu, vd, mnv, d, c], axis=1)
+    df.columns = ['tool use', 'vehicle days', '# vehicles', 'distance', 'cost']  # let op 'c'
     df = df.drop(['s2r3'])
-    df = df.apply(lambda x: x*100/sum(x), axis=0)
+    df = df.apply(lambda x: x * 100 / sum(x), axis=0)
+    df = df.transpose()
 
     df.plot(kind="bar", stacked=False, rot=0)
     plt.title("Algorithm's performance on the different aspects")
-    plt.ylabel('Rating')
-    plt.xlabel('Best algorithms')
+    plt.ylabel('Sum of ranks')
+    # plt.xlabel('Best algorithms')
+    plt.show()
+
+    df = pd.DataFrame(best_dict)
+    del df['s2r3']
+    df = df.apply(lambda x: x * 100 / sum(x), axis=1)
+
+    df.plot(kind="bar", stacked=False, rot=0)
+    plt.title("Best algorithm per instance type")
+    plt.ylabel('Sum of ranks')
+    labels = ('1', '2', '3', '4', '5')
+    plt.xlabel('Type')
+    ind = np.arange(5)
+    plt.xticks(ind, labels)
     plt.show()
 
 
