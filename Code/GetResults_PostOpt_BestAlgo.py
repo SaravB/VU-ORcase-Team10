@@ -58,7 +58,6 @@ def main():
         if i == 0:
             results_df.to_csv(resultsFolder + "Results_PostOpt_BestAlgo.csv")
         else:
-            print(i)
             results_df.to_csv(resultsFolder + "Results_PostOpt_BestAlgo_Averages.csv")
 
 

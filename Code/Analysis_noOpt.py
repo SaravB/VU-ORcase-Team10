@@ -5,7 +5,6 @@ import itertools
 
 
 def main():
-    data = pd.read_csv("Results/Results_noOpt.csv", header=[0, 1,2], index_col=[0,1])
     instanceNames = ['r100d5', 'r100d10', 'r500d15', 'r1000d25', 'r1000d30']
     costTypes = list(range(1, 6))
 
@@ -15,10 +14,8 @@ def main():
     data = pd.read_csv("Results/results_noOpt.csv", header=[0, 1,2], index_col=[0,1])
     new_data = data
 
-
     for st, rt in itertools.product(*[scheduleTypes,routingTypes]):
         new_data.loc[data[st, rt, 'f'] == 0, (st, rt,['tu', 'vd', 'mnv', 'd', 'c'])] = None
-
 
     def calc_ranking(new_data, letter, dictionary=False):
         best = []
@@ -34,7 +31,6 @@ def main():
 
         algs = sorted(set(algs))
 
-        print(best)
         best_dict = {}
         for alg in algs:
             counts = np.zeros(5)
@@ -46,8 +42,6 @@ def main():
                 if len(info) >=5 and info[4] == alg:
                     counts[info[1] - 1] += 1
             best_dict[alg] = counts
-
-        print(best_dict)
 
         df = pd.DataFrame(best_dict)
 
